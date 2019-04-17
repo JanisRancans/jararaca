@@ -19,7 +19,7 @@ api = tweepy.API(auth)
 user = api.me()
 print(user.name)
 
-keyw = ['Kariņ', 'Premjer', 'Valdīb', 'Ministr']
+keyw = ['Kariņš', 'Kariņa', 'Kariņu', 'Kariņ', 'Premjer', 'Premjers', 'Premjeru']
 
 
 class MyStreamListener(tweepy.StreamListener):
@@ -38,7 +38,7 @@ class MyStreamListener(tweepy.StreamListener):
         ax1.axis('equal')
 
         fig1 = plt.gcf()
-        fig1.savefig('karin.png')
+        fig1.savefig('valdiba.png')
 
         # Tweets text with date & picture
         date = datetime.datetime.today().strftime('%Y-%m-%d')
@@ -83,13 +83,14 @@ class MyStreamListener(tweepy.StreamListener):
                 self.counter += 1
 
                 # Bot wil tweet after accumulating 50 tweets about Latvian gov.
-                if self.counter > 50:
+                if self.counter > 0:
                     all_tweets = ' '
                     for i in self.tweet_list:
                         all_tweets += i
 
                     # Bot is using polyglot library to tokenize tweet text and to perform a polarity analysis on it
                     # Lists are emptied at the end
+
                     text = Text(all_tweets)
                     sent = text.sentences
                     polarity_list = [sentence.polarity for sentence in sent]
